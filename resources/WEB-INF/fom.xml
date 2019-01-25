@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <foms>
 	<includes>
-		<!-- <include>example_downloadHdfsFile.xml</include> -->
-		<!-- <include>example_downloadHdfsZip.xml</include> -->
-		<include>example_importLocalFileToEsByPool.xml</include>
-		<include>example_importLocalFileToMysqlByMybatis.xml</include>
-		<include>example_importLocalFileToMysqlByPool.xml</include>
-		<include>example_importLocalZipToOracleByMybatis.xml</include>
-		<include>example_importLocalZipToOracleByPool.xml</include>
+		<include>example1.xml</include>
+		<include>example2.xml</include>
+		<include>example3.xml</include>
+		<include>example4.xml</include>
+		<include>example5.xml</include>
+		<!-- <include>example6.xml</include> -->
+		<!-- <include>example7.xml</include> -->
 	</includes>
 </foms>
 

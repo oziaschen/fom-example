@@ -15,10 +15,10 @@
 4. log4j配置：默认读取根目录下WEB-INF/log4j.properties文件，也可以通过启动参数-Dlog4jConfigLocation指定（相对路径）
 
 * examples
-1. example_importLocalFileToEsByPool        解析本地txt/orc文件，使用自定义pool方式导入es，依赖elasticsearch环境，配置在WEB-INF/pool.xml；
-2. example_importLocalFileToMysqlByMybatis  解析本地txt/orc文件，使用mybatis方式导入mysql，依赖mysql环境，建表语句在sql/mysql.demo.sql，配置在dataSource/spring_datasource_mysql_demo.xml；
-3. example_importLocalFileToMysqlByPool     解析本地txt/orc文件，使用自定义pool方式导入mysql，依赖mysql环境，建表语句同上，配置在WEB-INF/pool.xml；
-4. example_importLocalZipToOracleByMybatis  解析本地zip(txt/orc)文件，使用mybatis方式导入oracle，依赖oracle环境，建表语句在sql/oracle.demo.sql，配置在dataSource/spring_datasource_oracle_demo.xml；
-5. example_importLocalZipToOracleByPool     解析本地zip(txt/orc)文件，使用自定义pool方式导入oracle，依赖oracle环境，建表语句同上，配置在WEB-INF/pool.xml；
-6. example_downloadHdfsFile     下载HDFS服务指定目录下文件，依赖大数据集群环境，由于没有本地环境，所以将其注释掉了；
-7. example_downloadHdfsZip      下载并打包HDFS服务指定目录下文件，依赖大数据集群环境，由于没有本地环境，所以将其注释掉了；
+1. example1  解析本地普通文本文件，使用自定义pool方式导入es，依赖elasticsearch环境，配置在WEB-INF/pool.xml；
+2. example2  解析本地普通文本文件，使用mybatis方式导入mysql，依赖mysql环境(sql/mysql.demo.sql)，配置在dataSource/spring_datasource_mysql_example.xml；
+3. example3  解析本地普通文本文件，使用自定义pool方式导入mysql，依赖mysql环境(sql/mysql.demo.sql)，配置在WEB-INF/pool.xml；
+4. example4  解析本地普通文本文件的zip包，使用mybatis方式导入oracle，依赖oracle环境(sql/oracle.demo.sql)，配置在dataSource/spring_datasource_oracle_example.xml；
+5. example5  解析本地普通文本文件的zip包，使用自定义pool方式导入oracle，依赖oracle环境(sql/oracle.demo.sql)，配置在WEB-INF/pool.xml；
+6. example6  下载HDFS服务指定目录下的文件，依赖大数据集群环境，由于没有本地环境，所以将其注释掉了；
+7. example7  下载并打包HDFS服务指定目录下的目录，依赖大数据集群环境，由于没有本地环境，所以将其注释掉了；
