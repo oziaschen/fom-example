@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.fom.context.executor.helper.abstractImporterHelper;
-import com.fom.context.executor.reader.Reader;
-import com.fom.context.executor.reader.TextReader;
+import com.fom.context.helper.AbstractParserHelper;
+import com.fom.context.reader.Reader;
+import com.fom.context.reader.TextReader;
 import com.fom.examples.bean.ExampleBean;
 import com.fom.examples.dao.ExamplesDao;
 import com.fom.util.SpringUtil;
@@ -15,12 +15,11 @@ import com.fom.util.SpringUtil;
 /**
  * 
  * @author shanhm
- * @date 2019年1月24日
  *
  */
-public class Example4Helper extends abstractImporterHelper<ExampleBean> {
+public class ImportMysqlExample1Helper extends AbstractParserHelper<ExampleBean> {
 
-	public Example4Helper(String name) {
+	public ImportMysqlExample1Helper(String name) {
 		super(name);
 	}
 
@@ -37,18 +36,18 @@ public class Example4Helper extends abstractImporterHelper<ExampleBean> {
 		}
 		ExampleBean bean = new ExampleBean(line);
 		bean.setSource("local");
-		bean.setFileType("zip(txt)");
+		bean.setFileType("txt");
 		bean.setImportWay("mybatis");
 		lineDatas.add(bean); 
 	}
-	
+
 	@Override
 	public void batchProcessIfNotInterrupted(List<ExampleBean> lineDatas, long batchTime) throws Exception {
-		ExamplesDao demoDao = SpringUtil.getBean("oracleDemoDao", ExamplesDao.class);
+		ExamplesDao demoDao = SpringUtil.getBean("mysqlExampleDao", ExamplesDao.class);
 		demoDao.batchInsert(lineDatas);
 		log.info("处理数据入库:" + lineDatas.size());
 	}
-
+	
 	@Override
 	public boolean delete(String sourceUri) {
 		return new File(sourceUri).delete();
@@ -58,4 +57,5 @@ public class Example4Helper extends abstractImporterHelper<ExampleBean> {
 	public long getSourceSize(String sourceUri) {
 		return new File(sourceUri).length();
 	}
+
 }

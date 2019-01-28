@@ -3,18 +3,20 @@ package com.fom.examples;
 import java.io.File;
 
 import com.fom.context.Config;
-import com.fom.context.ContextUtil;
-import com.fom.context.executor.ImporterConfig;
+import com.fom.context.ContextManager;
 
 /**
  * 
  * @author shanhm
- * @date 2019年1月15日
  *
  */
-public class EsImpoterConfig extends Config implements ImporterConfig {
+public class ImportEsExampleConfig extends Config {
+	
+	private String srcPath;
 	
 	private int batch;
+	
+	private boolean isDelMatchFail;
 	
 	private String esIndex;
 	
@@ -24,21 +26,23 @@ public class EsImpoterConfig extends Config implements ImporterConfig {
 	
 	private File esJsonFile;
 	
-	protected EsImpoterConfig(String name) {
+	protected ImportEsExampleConfig(String name) {
 		super(name);
 	}
 	
 	@Override
 	protected void loadExtends() throws Exception {
-		batch = loadExtends("importer.batch", 5000, 1, 50000);
-		esIndex = loadExtends("es.index", ""); 
-		esType = loadExtends("es.type", ""); 
-		esJson = loadExtends("es.json", ""); 
+		srcPath = load("src.path", "");
+		isDelMatchFail = load("importer.isDelMatchFail", false);
+		batch = load("importer.batch", 5000, 1, 50000);
+		esIndex = load("es.index", ""); 
+		esType = load("es.type", ""); 
+		esJson = load("es.json", ""); 
 	}
 	
 	@Override
 	protected boolean valid() throws Exception {
-		esJsonFile = new File(ContextUtil.getRealPath(esJson));
+		esJsonFile = new File(ContextManager.getContextPath(esJson));
 		if(!esJsonFile.exists()){
 			LOG.error("文件不存在：" + esJson); 
 			return false;
@@ -46,12 +50,14 @@ public class EsImpoterConfig extends Config implements ImporterConfig {
 		return true;
 	}
 	
-	@Override
-	public String getType() {
-		return TYPE_IMPORTER;
+	public String getSrcPath() {
+		return srcPath;
 	}
 	
-	@Override
+	public boolean isDelMatchFail() {
+		return isDelMatchFail;
+	}
+
 	public int getBatch() {
 		return batch;
 	}

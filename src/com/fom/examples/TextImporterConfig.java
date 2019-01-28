@@ -1,35 +1,40 @@
 package com.fom.examples;
 
 import com.fom.context.Config;
-import com.fom.context.executor.ImporterConfig;
 
 /**
  * 
  * @author shanhm
- * @date 2018年12月23日
  *
  */
-public class TextImporterConfig extends Config implements ImporterConfig {
-	
+public class TextImporterConfig extends Config {
+
+	private String srcPath;
+
 	private int batch;
+
+	private boolean isDelMatchFail;
 
 	protected TextImporterConfig(String name) {
 		super(name);
 	}
-	
-	@Override
-	protected void loadExtends() throws Exception {
-		batch = loadExtends("importer.batch", 5000, 1, 50000);
-	}
 
 	@Override
-	public String getType() {
-		return TYPE_IMPORTER;
+	protected void loadExtends() throws Exception { 
+		batch = load("importer.batch", 5000, 1, 50000);
+		srcPath = load("src.path", "");
+		isDelMatchFail = load("importer.isDelMatchFail", false);
 	}
 
-	@Override
 	public int getBatch() {
 		return batch;
 	}
-	
+
+	public String getSrcPath() {
+		return srcPath;
+	}
+
+	public boolean isDelMatchFail() {
+		return isDelMatchFail;
+	}
 }

@@ -1,23 +1,21 @@
 package com.fom.examples;
 
-import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.fom.context.Config;
-import com.fom.context.executor.LocalZipImporterConfig;
 
 /**
  * 
  * @author shanhm
- * @date 2018年12月23日
  *
  */
-public class TextZipImporterConfig extends Config implements LocalZipImporterConfig {
+public class TextZipImporterConfig extends Config {
 	
+	private String srcPath;
+
 	private int batch;
+
+	private boolean isDelMatchFail;
 	
-	private Pattern pattern;
+	private String pattern;
 
 	protected TextZipImporterConfig(String name) {
 		super(name);
@@ -25,29 +23,26 @@ public class TextZipImporterConfig extends Config implements LocalZipImporterCon
 	
 	@Override
 	protected void loadExtends() throws Exception {
-		batch = loadExtends("importer.batch", 5000, 1, 50000);
-		String reg = loadExtends("zip.entryPattern", "");
-		if(!StringUtils.isBlank(reg)){
-			pattern = Pattern.compile(reg);
-		}
-	}
-	
-	@Override
-	public boolean matchEntryName(String fileName) {
-		if(pattern == null){
-			return true;
-		}
-		return pattern.matcher(fileName).find();
+		batch = load("importer.batch", 5000, 1, 50000);
+		srcPath = load("src.path", "");
+		isDelMatchFail = load("importer.isDelMatchFail", false);
+		pattern = load("zip.entryPattern", "");
 	}
 
-	@Override
-	public String getType() {
-		return TYPE_IMPORTER;
-	}
-	
-	@Override
 	public int getBatch() {
 		return batch;
+	}
+
+	public String getSrcPath() {
+		return srcPath;
+	}
+
+	public boolean isDelMatchFail() {
+		return isDelMatchFail;
+	}
+	
+	public String getEntryPattern(){
+		return pattern;
 	}
 	
 }

@@ -7,18 +7,17 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.fom.context.executor.helper.abstractImporterHelper;
-import com.fom.context.executor.reader.Reader;
-import com.fom.context.executor.reader.TextReader;
+import com.fom.context.helper.AbstractParserHelper;
+import com.fom.context.reader.Reader;
+import com.fom.context.reader.TextReader;
 import com.fom.db.handler.JdbcHandler;
 
 /**
  * 
  * @author shanhm
- * @date 2019年1月24日
  *
  */
-public class Example3Helper extends abstractImporterHelper<Map<String, Object>> {
+public class ImportMysqlExample2Helper extends AbstractParserHelper<Map<String, Object>> {
 
 	private static final String POOL = "example_mysql";
 
@@ -26,7 +25,7 @@ public class Example3Helper extends abstractImporterHelper<Map<String, Object>> 
 			"insert into demo(id,name,source,filetype,importway) "
 					+ "values (#id#,#name#,#source#,#fileType#,#importWay#)";
 
-	public Example3Helper(String name) {
+	public ImportMysqlExample2Helper(String name) {
 		super(name);
 	}
 
@@ -46,7 +45,7 @@ public class Example3Helper extends abstractImporterHelper<Map<String, Object>> 
 		map.put("id", array[0]);
 		map.put("name", array[1]);
 		map.put("source", "local");
-		map.put("fileType", "txt/orc");
+		map.put("fileType", "txt");
 		map.put("importWay", "pool");
 		lineDatas.add(map);
 	}
