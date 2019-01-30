@@ -1,7 +1,7 @@
-> 考虑到不熟悉maven的同学，直接用fom-context.jar及其依赖以examples写一个普通java工程的示例
+> 使用fom-context.jar写一个java工程的example
 
-* 访问URL：http://localhost:4040/fom/index.html(端口和context-path在application.properties中配置)
-* 应用启动类：com.fom.boot.Application
+* 访问URL：http://localhost:4040/fom(端口和context-path在application.properties中配置)
+* 应用启动类：com.fom.boot.Application, 在eclipse中启动时设置下jvm参数-Dlog.root="本地工程路径"，不然日志会打到class编译的bin目录
 
 * 路径
 1. 默认应用的根目录为路径为class资源的目录，可以通过启动参数-Dwebapp.root指定
@@ -14,11 +14,3 @@
 3. pool配置：默认读取根目录下WEB-INF/pool.xml文件，也可以通过启动参数-DpoolConfigLocation指定（相对路径）
 4. log4j配置：默认读取根目录下WEB-INF/log4j.properties文件，也可以通过启动参数-Dlog4jConfigLocation指定（相对路径）
 
-* examples
-1. example1  解析本地普通文本文件，使用自定义pool方式导入es，依赖elasticsearch环境，配置在WEB-INF/pool.xml；
-2. example2  解析本地普通文本文件，使用mybatis方式导入mysql，依赖mysql环境(sql/mysql.demo.sql)，配置在dataSource/spring_datasource_mysql_example.xml；
-3. example3  解析本地普通文本文件，使用自定义pool方式导入mysql，依赖mysql环境(sql/mysql.demo.sql)，配置在WEB-INF/pool.xml；
-4. example4  解析本地普通文本文件的zip包，使用mybatis方式导入oracle，依赖oracle环境(sql/oracle.demo.sql)，配置在dataSource/spring_datasource_oracle_example.xml；
-5. example5  解析本地普通文本文件的zip包，使用自定义pool方式导入oracle，依赖oracle环境(sql/oracle.demo.sql)，配置在WEB-INF/pool.xml；
-6. example6  下载HDFS服务指定目录下的文件，依赖大数据集群环境，由于没有本地环境，所以将其注释掉了；
-7. example7  下载并打包HDFS服务指定目录下的目录，依赖大数据集群环境，由于没有本地环境，所以将其注释掉了；
