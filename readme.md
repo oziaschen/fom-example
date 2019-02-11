@@ -1,6 +1,6 @@
 > 使用fom-context.jar写一个java工程的example
 
-* 访问URL：http://localhost:4040/fom(端口和context-path在application.properties中配置)
+* 访问URL：http://localhost:4545/fom(端口和context-path在application.properties中配置)
 * 应用启动类：com.fom.boot.Application, 在eclipse中启动时设置下jvm参数-Dlog.root="本地工程路径"，不然日志会打到class编译的bin目录
 
 * 路径

@@ -10,10 +10,8 @@ import org.apache.hadoop.fs.PathFilter;
 
 import com.fom.context.Context;
 import com.fom.context.Executor;
-import com.fom.context.ResultHandler;
 import com.fom.context.executor.ZipDownloader;
 import com.fom.context.helper.HdfsZipDownloaderHelper;
-import com.fom.context.helper.ZipDownloaderHelper;
 import com.fom.util.HdfsUtil;
 
 /**
@@ -23,7 +21,11 @@ import com.fom.util.HdfsUtil;
  */
 public class DownloadHdfsZipExample extends Context {
 
+	private static final long serialVersionUID = -6055805119506513553L;
+
 	private FileSystem fs;
+	
+	private String srPath;
 
 	private String destPath = "${webapp.root}/download"; 
 
@@ -63,33 +65,11 @@ public class DownloadHdfsZipExample extends Context {
 		});  
 
 		String sourceName = new File(sourceUri).getName();
-		Handler handler = new Handler(sourceUri, isDelSrc, helper);
+		DownloadHdfsZipExampleResultHandler handler = 
+				new DownloadHdfsZipExampleResultHandler(fs, srPath,isDelSrc);
 		ZipDownloader zipDownloader = new ZipDownloader(sourceName, pathList, destPath, 
 				entryMax, sizeMax, isDelSrc, helper, handler);
 		return zipDownloader;
-
-	}
-
-	private class Handler implements ResultHandler {
-
-		private String sourceUri;
-
-		private boolean isDelSrc;
-
-		private ZipDownloaderHelper helper;
-
-		public Handler(String sourceUri, boolean isDelSrc, ZipDownloaderHelper helper){
-			this.sourceUri = sourceUri;
-			this.isDelSrc = isDelSrc;
-			this.helper = helper;
-		}
-
-		@Override
-		public void handle(boolean result) throws Exception { 
-			if(result && isDelSrc && !helper.delete(sourceUri)) {
-				DownloadHdfsZipExample.this.log.error("删除源目录失败."); 
-			}
-		} 
 	}
 
 }

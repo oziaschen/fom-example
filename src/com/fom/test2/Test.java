@@ -8,6 +8,8 @@ import com.fom.context.Executor;
 
 public class Test extends Context {
 	
+	private static final long serialVersionUID = 7593940468052384937L;
+
 	@Override
 	protected List<String> getUriList() throws Exception {
 		List<String> list = new ArrayList<String>();
