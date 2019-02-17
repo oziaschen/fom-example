@@ -6,11 +6,11 @@ import java.util.List;
 
 import com.fom.context.Context;
 import com.fom.context.ContextUtil;
-import com.fom.context.Executor;
+import com.fom.context.Task;
 import com.fom.context.FomContext;
-import com.fom.context.executor.Uploader;
-import com.fom.context.helper.UploaderHelper;
+import com.fom.context.helper.UploadHelper;
 import com.fom.context.helper.impl.FtpHelper;
+import com.fom.context.task.UploadTask;
 
 /**
  * 
@@ -35,7 +35,7 @@ public class UploadFtpExample extends Context {
 	}
 	
 	@Override
-	protected List<String> getUriList() throws Exception {
+	protected List<String> getTaskIdList() throws Exception {
 		String path = ContextUtil.getContextPath("/source");
 		List<String> list = new ArrayList<String>();
 		list.add(path + File.separator + "ftp.jpg");
@@ -43,10 +43,12 @@ public class UploadFtpExample extends Context {
 	}
 
 	@Override
-	protected Executor createExecutor(String sourceUri) throws Exception {
-		UploaderHelper helper = new FtpHelper(hostname, port, user, passwd);
+	protected Task createTask(String sourceUri) throws Exception {
+		Thread.sleep(5000); 
+		
+		UploadHelper helper = new FtpHelper(hostname, port, user, passwd);
 		String destUri = "http://localhost:4040/fom/";
-		return new Uploader(sourceUri, destUri, false, helper);
+		return new UploadTask(sourceUri, destUri, false, helper);
 	}
 
 }

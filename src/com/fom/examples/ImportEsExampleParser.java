@@ -2,10 +2,10 @@ package com.fom.examples;
 
 import java.io.File;
 
-import com.fom.context.executor.Parser;
+import com.fom.context.task.ParseTask;
 import com.fom.db.handler.EsHandler;
 
-public class ImportEsExampleExecutor extends Parser {
+public class ImportEsExampleParser extends ParseTask {
 	
 	private static final String POOL = "example_es";
 	
@@ -15,7 +15,7 @@ public class ImportEsExampleExecutor extends Parser {
 	
 	private File esJson;
 
-	public ImportEsExampleExecutor(String sourceUri, int batch, 
+	public ImportEsExampleParser(String sourceUri, int batch, 
 			ImportEsExampleHelper helper, String esIndex, String esType, File esJson) {
 		super(sourceUri, batch, helper); 
 		this.esIndex = esIndex;
@@ -24,8 +24,8 @@ public class ImportEsExampleExecutor extends Parser {
 	}
 
 	@Override
-	protected boolean onStart() throws Exception {
-		super.onStart();
+	protected boolean beforeExec() throws Exception {
+		super.beforeExec();
 		if(EsHandler.handler.synCreateIndex(POOL, esIndex, esType, esJson)){
 			log.info("创建ES索引[index=" + "demo" + ", type=" + "demo" + "]");
 		}

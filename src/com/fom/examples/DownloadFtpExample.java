@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fom.context.Context;
-import com.fom.context.Executor;
+import com.fom.context.Task;
 import com.fom.context.FomContext;
-import com.fom.context.executor.Downloader;
-import com.fom.context.helper.DownloaderHelper;
+import com.fom.context.helper.DownloadHelper;
 import com.fom.context.helper.impl.FtpHelper;
+import com.fom.context.task.DownloadTask;
 
 /**
  * 
@@ -31,23 +31,25 @@ public class DownloadFtpExample extends Context {
 	}
 
 	@Override
-	protected List<String> getUriList() throws Exception {
+	protected List<String> getTaskIdList() throws Exception {
+		Thread.sleep(5000); 
+		
 		List<String> list = new ArrayList<String>();
 		list.add("/ftp/test.txt");
 		return list;
 	}
 
 	@Override
-	protected Executor createExecutor(String sourceUri) throws Exception {
+	protected Task createTask(String sourceUri) throws Exception {
 		String hostname = getValue("hostname");
 		int port = getInt("port", 0);
 		String user = getValue("user");
 		String passwd = getValue("passwd");
 		String dest = getValue("dest");
 		
-		DownloaderHelper helper = new FtpHelper(hostname, port, user, passwd);
+		DownloadHelper helper = new FtpHelper(hostname, port, user, passwd);
 		String sourceName = new File(sourceUri).getName();
-		return new Downloader(sourceName, sourceUri, dest, false, true, helper);
+		return new DownloadTask(sourceUri, sourceName, dest, false, true, helper);
 	}
 
 }

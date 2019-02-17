@@ -149,6 +149,6 @@
 	<classpathentry kind="lib" path="lib/commons-net-3.6.jar"/>
 	<classpathentry kind="lib" path="lib/commons-text-1.6.jar"/>
 	<classpathentry kind="lib" path="lib/httpmime-4.5.6.jar"/>
-	<classpathentry kind="lib" path="lib/fom-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/fom-1.0.jar" sourcepath="src.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

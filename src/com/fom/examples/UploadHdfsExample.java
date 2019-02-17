@@ -6,11 +6,11 @@ import java.util.List;
 
 import com.fom.context.Context;
 import com.fom.context.ContextUtil;
-import com.fom.context.Executor;
+import com.fom.context.Task;
 import com.fom.context.FomContext;
-import com.fom.context.executor.Uploader;
-import com.fom.context.helper.UploaderHelper;
+import com.fom.context.helper.UploadHelper;
 import com.fom.context.helper.impl.HdfsHelper;
+import com.fom.context.task.UploadTask;
 
 /**
  * 
@@ -29,7 +29,7 @@ public class UploadHdfsExample extends Context {
 	private String destPath;
 
 	@Override
-	protected List<String> getUriList() throws Exception {
+	protected List<String> getTaskIdList() throws Exception {
 		String path = ContextUtil.getContextPath("/source");
 		List<String> list = new ArrayList<String>();
 		list.add(path + File.separator + "hdfs.jpg");
@@ -37,9 +37,11 @@ public class UploadHdfsExample extends Context {
 	}
 
 	@Override
-	protected Executor createExecutor(String sourceUri) throws Exception {
-		UploaderHelper helper = new HdfsHelper(masterUrl, slaveUrl);
-		return new Uploader(sourceUri, destPath, false, helper);
+	protected Task createTask(String sourceUri) throws Exception {
+		Thread.sleep(10000); 
+		
+		UploadHelper helper = new HdfsHelper(masterUrl, slaveUrl);
+		return new UploadTask(sourceUri, destPath, false, helper);
 		
 	}
 
